@@ -1,0 +1,14 @@
+<table>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Class</th>
+    {% for row in query %}
+    <tr>
+        <td>{{ row.date }}</td>
+        <td>{{ row.description }}</td>
+        <td>{{ row.amount }}</td>
+        <td>DROP DOWN FORM FIELD</td>
+    </tr>
+    {% endfor %}
+</table>
