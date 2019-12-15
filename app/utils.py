@@ -40,8 +40,17 @@ def import_csv(csv_file, instance):
 
 def write_csv():
     """Function to export a CSV file from a query of table."""
+
     with open('export.csv', 'w') as f:
         out = csv.writer(f)
         out.writerow(['date', 'description', 'debit', 'credit', 'category'])
         for row in Statement.query.all():
             out.writerow([row.date, row.description, row.debit, row.credit, row.category])
+
+
+def delete_table():
+    """Delete all rows from current table."""
+
+    db.session.query(Statement).delete()
+    db.session.commit()
+

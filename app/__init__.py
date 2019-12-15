@@ -7,6 +7,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 # Set up the configuration
 app.config.from_object('config')
 
@@ -17,6 +18,11 @@ migrate = Migrate(app, db)
 # Import the views
 from app import views, models
 
+from app.utils import delete_table
+
+
+# Clear previous values
+delete_table()
 
 
 

@@ -3,16 +3,30 @@
 {% block content %}
 
 <div class="jumbotron bg-info">
-<h2>Import CSV</h2>
-
-<form action="/import" method="post" enctype="multipart/form-data">
-    {{ form.upload }}
-    {{ form.submit }}
-    {{ form.csrf_token }}
-    {{ form.type }}
-    <br>
-    {{ form.upload.errors[0] }}
-</form>
+<h2>Upload Bank Statement</h2>
+    <p>Import bank statement, download in CSV form. Currently only supporting Bank of America, but can easily add more.</p>
 </div>
+
+    <form action="/import" method="post" enctype="multipart/form-data">
+        <div class="form-row align-items-center">
+            <div class="col-sm-4 my-1"">
+                <input type="file" name="csv" accept="text/csv" id="import">
+            </div>
+            <div class="col-sm-4 my-1"">
+                <select name="type" id="select-bank" >
+                        <option value="bofa_csv">Bank of America</option>
+                        <option value="wellsfargo_csv">Wells Fargo</option>
+                        <option value="creditunion_csv">Credit Union</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+
+
+
+</form>
+
 
 {% endblock %}

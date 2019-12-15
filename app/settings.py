@@ -1,0 +1,10 @@
+tax_categories = ['Ask My Accountant',
+                  'Home Office',
+                  'Travel and hotel',
+                  'Utilities',
+                  'Professional development',
+                  'Advertising and marketing',
+                  'Website',
+                  'Software',
+                  'Mileage and gas',
+                  'Incorporation']

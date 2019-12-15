@@ -19,8 +19,8 @@ class Statement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
     description = db.Column(db.String(300))
-    debit = db.Column(db.Numeric(10, 2))
-    credit = db.Column(db.Numeric(10, 2))
+    debit = db.Column(db.Numeric(10, 2), default=0)
+    credit = db.Column(db.Numeric(10, 2), default=0)
     category = db.Column(db.String(300))
 
 

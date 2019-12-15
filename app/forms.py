@@ -6,16 +6,16 @@ from wtforms import SubmitField
 from werkzeug.utils import secure_filename
 
 
-class MyForm(FlaskForm):
-    """Create form with fields to upload CSV file."""
-    upload = FileField('file', validators=[FileRequired(), FileAllowed(['csv'], 'Invalid format, CSV only')])
-    type = SelectField('type',
-                       choices=[('bofa_csv', 'Bank of America'),
-                                ('wellsfargo_csv', 'Wells Fargo'),
-                                ('creditunion_csv', 'Credit Union'),
-                                ]
-                       )
-    submit = SubmitField('Upload')
+# class MyForm(FlaskForm):
+#     """Create form with fields to upload CSV file."""
+#     upload = FileField('file', validators=[FileRequired(), FileAllowed(['csv'], 'Invalid format, CSV only')])
+#     type = SelectField('type',
+#                        choices=[('bofa_csv', 'Bank of America'),
+#                                 ('wellsfargo_csv', 'Wells Fargo'),
+#                                 ('creditunion_csv', 'Credit Union'),
+#                                 ]
+#                        )
+#     submit = SubmitField('Submit')
 
 # class Category(FlaskForm):
 #     """Create class with fields for tax categories."""

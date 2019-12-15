@@ -1,24 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <div class="jumbotron bg-info">
-<h2>Update Tax Category for Transactions</h2>
-<p>Here's a place to select from the dropdown menu. When finished, click the submit button!</p></div>
+<h2>Select Tax Category</h2>
+<p>Here's a place to select from the dropdown menu. When finished, click the submit button!</p>
+</div>
+
 <table class="table">
-    <th>Date</th>
-    <th>Description</th>
-    <th>Debit</th>
-    <th>Credit</th>
-    <th>Category</th>
+    <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Category</th>
+    </tr>
     <form action="/view" method="post">
     {% for row in query %}
     <tr>
         <td nowrap="nowrap">{{ row.date }}</td>
-        <td>{{ row.description }}</td>
+        <td width="40%">{{ row.description }}</td>
         <td>{{ row.debit }}</td>
         <td>{{ row.credit }}</td>
         <td>
-            <select name="text-{{ row.id }}">
+            <select class="custom-select" name="text-{{ row.id }}">
+                <option value="{{ row.category }}">{{ row.category }}</option>
+                <option disabled>----------</option>
                 {% for tax_category in tax_categories %}
                 <option value="{{ tax_category }}">{{ tax_category }}</option>
                 {% endfor %}
@@ -27,13 +35,14 @@
     </tr>
     {% endfor %}
     <tr>
-        <td align="center" colspan="5">
+        <td align="center" colspan="6">
             <button class="btn btn-primary" name="submit" type="submit">Submit</button>
         </td>
     </tr>
+        </form>
+
 </table>
 
-</form>
 
 {% endblock %}
 

@@ -2,20 +2,31 @@
 
 {% block content %}
 
+<div class="jumbotron bg-info">
+<h2>Totals</h2>
+<p>Sum totals of all transactions, categorized. Similar to a pivot table.</p>
+</div>
 
 <table class="table">
     <th>Category</th>
     <th>Debit Total</th>
     <th>Credit Total</th>
+    <th>Sum Total</th>
     {% for row in query %}
     <tr>
         <td>{{ row.category }}</td>
-        <td>{{ row.debit }}
+        <td>{{ row.debit }}</td>
         <td>{{ row.credit }}</td>
+        <td>{{ row.total }}</td>
     </tr>
     {% endfor %}
-
 </table>
+<div align="right">
+<form method="post" action="/total">
+   <button class="btn-primary" type="submit">Download CSV</button>
+</form>
+</div>
+
 
 {% endblock %}
 
