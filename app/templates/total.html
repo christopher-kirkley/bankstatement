@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<table class="table">
+    <th>Category</th>
+    <th>Debit Total</th>
+    <th>Credit Total</th>
+    {% for row in query %}
+    <tr>
+        <td>{{ row.category }}</td>
+        <td>{{ row.debit }}
+        <td>{{ row.credit }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
+

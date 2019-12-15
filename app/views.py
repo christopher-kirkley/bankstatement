@@ -9,13 +9,15 @@ from itertools import islice
 from flask import render_template, request, redirect, url_for
 from .forms import MyForm
 from io import TextIOWrapper
+from sqlalchemy import func
 
 
 @app.route('/')
 @app.route('/index')
 def index():
     """Index and home page."""
-    return "<h1>This is an app to process bank statements from CSV into tax readable format.</h1>"
+
+    return render_template('index.html')
 
 
 @app.route('/import', methods=['get', 'post'])
@@ -68,26 +70,46 @@ def import_statement():
             import_csv(csv_file, wellsfargo_csv)
         return redirect(url_for('view_statement'))
 
-
     return render_template('import.html', form=form)
 
 @app.route('/view', methods=['get', 'post'])
 def view_statement():
     """Route for viewing and updating imported statement."""
 
-    """Run a query that selects all fadarom table."""
+    def write_csv():
+        """Function to export a CSV file from a query of table."""
+        with open('export.csv', 'w') as f:
+            out = csv.writer(f)
+            out.writerow(['date', 'description', 'debit', 'credit', 'category'])
+            for row in Statement.query.all():
+                out.writerow([row.date, row.description, row.debit, row.credit, row.category])
+
+    tax_categories = ['Ask My Accountant', 'Office', 'Computer', 'Shipping Supplies', ]
+
+    """Run a query that selects all table."""
     query = Statement.query.all()
 
     """Action on submit."""
-    if request.method='POST':
-        pass
-        #take everything from query and request, and submit to other template?
+    if request.method == 'POST':
+        """Query entire table, set category to new value in form."""
+        rows = Statement.query.all()
+        for row in rows:
+            row.category = request.form.get(f'text-{row.id}')
+            db.session.commit()
+        """Write csv from new table."""
+        write_csv()
+        return redirect(url_for('total'))
 
+    return render_template('view.html', query=query, tax_categories=tax_categories)
 
+@app.route('/total', methods=['get', 'post'])
+def total():
+    """Route to display sum totals."""
 
+    query = db.session.query(Statement.category,
+                            func.sum(Statement.debit).label('debit'),
+                            func.sum(Statement.credit).label('credit')
+                            ).group_by(Statement.category
+                                       ).all()
 
-
-
-
-
-    return render_template('view.html', query=query)
+    return render_template('total.html', query=query)
