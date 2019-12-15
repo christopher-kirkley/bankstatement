@@ -1,0 +1,10 @@
+<h1>Import CSV</h1>
+
+<form action="/import" method="post" enctype="multipart/form-data">
+    {{ form.upload }}
+    {{ form.submit }}
+    {{ form.csrf_token }}
+    {{ form.type }}
+    <br>
+    {{ form.upload.errors[0] }}
+</form>
