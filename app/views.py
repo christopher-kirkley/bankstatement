@@ -102,3 +102,16 @@ def download():
                             ).group_by(Statement.category
                                        ).all()
 
+
+@app.route('/settings', methods=['post', 'get'])
+def settings():
+
+    if request.method == 'POST':
+        if request.form.get('submit') == 'add':
+            new_category = request.form.get('add')
+            tax_categories.append(new_category)
+        if request.form.get('submit') == 'delete':
+            category = request.form.get('category')
+            tax_categories.remove(category)
+
+    return render_template('settings.html', tax_categories=tax_categories)

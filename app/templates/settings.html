@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="jumbotron bg-info">
+<h2>Settings</h2>
+<p>Edit settings.</p>
+</div>
+
+
+
+<div class="container">
+    <h3>Edit Categories</h3>
+    {% for category in tax_categories %}
+<form class="form-group row" action="/settings" method="post">
+  <div class="col-sm-3">
+    <input type="text" readonly class="form-control-plaintext" id="{{ category }}" name="category" value="{{ category }}">
+  </div>
+    <div class="col-sm-5">
+    <button type="submit" class="btn btn-warning mb-1" name="submit" value="delete">Delete</button>
+    </div>
+</form>
+{% endfor %}
+    <form class="form-group row" action="/settings" method="post">
+      <div class="col-sm-3">
+        <input type="text" name="add">
+      </div>
+        <div class="col-sm-5">
+        <button type="submit" class="btn btn-primary mb-1" name="submit" value="add">Add</button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
