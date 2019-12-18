@@ -12,7 +12,6 @@ class ImportedCSV:
         self.encoding = encoding
 
 
-
 """Define a model for bank statements."""
 class Statement(db.Model):
     __tablename__ = 'statement'

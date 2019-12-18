@@ -1,5 +1,4 @@
 """Define Flask application"""
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask import Flask
@@ -14,6 +13,7 @@ app.config.from_object('config')
 # Define database
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 # Import the views
 from app import views, models
