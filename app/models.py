@@ -23,6 +23,5 @@ class Statement(db.Model):
     category = db.Column(db.String(300))
 
 
-db.create_all()
 
 
